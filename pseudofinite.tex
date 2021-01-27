@@ -1,0 +1,734 @@
+\documentclass[10pt,oneside, openany]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} 
+% \usepackage[dvips,paperheight=11cm, paperwidth=21cm, ,hmargin={9.5cm,0.5cm},vmargin={0.5cm,0.5cm}]{geometry}
+\usepackage[a4paper, hmargin={4cm,4cm},vmargin={2.5cm,2.5cm}]{geometry}
+\usepackage[unicode, colorlinks=true,bookmarksopen=false,linkcolor=blue,citecolor=red]{hyperref}
+\usepackage{subfiles}
+\usepackage{calc}
+\usepackage{comment}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsrefs}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{dsfont}
+\usepackage{euscript}
+\usepackage{fourier-orns}
+%\usepackage{pxfonts}
+%\usepackage{newpxtext}
+%\usepackage{tgpagella}
+\usepackage{palatino}
+\usepackage[sc]{mathpazo} % add possibly `sc` and `osf` options
+%\usepackage{eulervm}
+%\usepackage[adobe-utopia]{mathdesign}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\tikzcdset{
+arrow style=tikz,
+diagrams={>=latex}
+}
+
+
+\linespread{1.2}
+\setlength{\parindent}{0ex}
+\setlength{\parskip}{.4\baselineskip}
+\definecolor{blue}{rgb}{0, 0.1, 0.6}
+
+\DeclareFontFamily{OT1}{pzc}{}
+\DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [1.10] pzcmi7t}{}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+
+\newcommand{\mylabel}[1]{{\ssf{#1}}\hfill}
+\renewenvironment{itemize}
+  {\begin{list}{$\triangleright$}{%
+   \setlength{\parskip}{0mm}
+   \setlength{\topsep}{.4\baselineskip}
+   \setlength{\rightmargin}{0mm}
+   \setlength{\listparindent}{0mm}
+   \setlength{\itemindent}{0mm}
+   \setlength{\labelwidth}{2ex}
+   \setlength{\itemsep}{.2\baselineskip}
+   \setlength{\parsep}{1ex}
+   \setlength{\partopsep}{0mm}
+   \setlength{\labelsep}{1ex}
+   \setlength{\leftmargin}{\labelwidth+\labelsep}
+   \let\makelabel\mylabel}}{%
+   \end{list}\vspace*{-1.3mm}}
+
+\renewcommand*{\emph}[1]{%
+   \smash{\tikz[baseline]\node[rectangle, fill=green!40, rounded corners, inner xsep=0.5ex, inner ysep=0.2ex, anchor=base, minimum height = 2.7ex]{#1};}}
+
+\def\jj{\mbox{-}}
+\def\E{\exists}
+\def\A{\forall}
+\def\mdot{\mathord\cdot}
+\def\models{\vDash}
+\def\pmodels{\mathrel{\models\kern-1.5ex\raisebox{.5ex}{*}}}
+\def\notmodels{\nvDash}
+\def\proves{\vdash}
+\def\notproves{\nvdash}
+\def\proves{\vdash}
+\def\provesT{\mathrel{\mathord{\vdash}\hskip-1.13ex\raisebox{-.5ex}{\tiny$T$}}}
+\def\ZZ{\mathds Z}
+\def\NN{\mathds N}
+\def\QQ{\mathds Q}
+\def\RR{\mathds R}
+\def\BB{\mathds B}
+\def\CC{\mathds C}
+\def\PP{\mathds P}
+\def\Ar{{\rm Ar}}
+\def\dom{\mathop{\rm dom}}
+\def\range{\mathop{\rm range}}
+\def\supp{\mathop{\rm supp}}
+\def\rank{\mathop{\rm rank}}
+\def\dcl{\mathop{\rm dcl}}
+\def\acl{\mathop{\rm acl}}
+\def\rad{\mathop{\rm rad}}
+\def\eq{{{\rm eq}}}
+\def\ccl{{\rm ccl}}
+\def\Th{\textrm{Th}}
+\def\Diag{{\rm Diag}}
+\def\atpmTh{\textrm{Th}_\atpm}
+\def\Mod{\mathop{\rm Mod}}
+\def\Indicator{{\mathds I}}
+\def\Rmod{{\mbox{\scriptsize $R$-mod}}}
+\def\Aut{{\rm Aut\kern.0ex}}
+\def\Def{{\rm Def\kern.0ex}}
+\def\Brl{{\rm Brl\kern.0ex}}
+\def\Autf{\mathord{\rm Aut\kern.15ex{f}\kern.15ex}}
+\def\orbit{\O}
+\def\oorbit{\mathpzc{o}}
+\def\oorbitf{\mathpzc{of\!}}
+\def\id{\textrm{id}}
+\def\tp{{\rm tp}}
+\def\atpm{{\tiny\rm at^\pm}}
+\def\qftp{\textrm{qf\mbox{-}tp}}
+\def\attp{\textrm{at\mbox{-}tp}}
+\def\atpmtp{\atpm\mbox{-}\textrm{tp}}
+\def\Deltatp{\Delta\mbox{-}\textrm{tp}}
+\def\pmDelta{\Delta\hskip-.3ex\raisebox{1ex}{\tiny$\pm$}}
+\def\pmDeltatp{\noindent\pmDelta\hskip-.3ex\textrm{-tp}}
+\def\EMtp{\textrm{{\small EM}\mbox{-}tp}}
+
+
+\def\sm{\smallsetminus}
+\def\atpmL{L_{\atpm}\hskip-.3ex}
+\def\qfL{L_{\rm qf}}
+\def\atL{L_{\tiny\rm at}\hskip-.3ex}
+\def\simdiff{\mathop\vartriangle}
+\def\IMP{\Rightarrow}
+\def\PMI{\Leftarrow}
+\def\IFF{\Leftrightarrow}
+\def\NIFF{\nLeftrightarrow}
+\def\imp{\rightarrow}
+\def\pmi{\leftarrow}
+\def\iff{\leftrightarrow}
+\def\niff{\mathrel{{\leftrightarrow}\llap{\raisebox{-.1ex}{{\small$/$}}\hskip.5ex}}}
+\def\nequiv{\mathrel{\mbox{$\equiv$\llap{{\small$/$}\hskip.3ex}}}}
+\def\equivEM{\stackrel{\smash{\scalebox{.5}{\rm EM}}}{\equiv}}
+\def\equivL{\stackrel{\smash{\scalebox{.5}{\rm L}}}{\equiv}}
+\def\equivKP{\stackrel{\smash{\scalebox{.5}{\rm KP}}}{\equiv}}
+\def\equivSh{\stackrel{\smash{\scalebox{.5}{\rm Sh}}}{\equiv}}
+\def\dIFF{\IFF\hskip-2.2ex\smash{\raisebox{1.3ex}{\tiny def}}}
+\def\deq{\mathrel{=\hskip-1.9ex\smash{\raisebox{1.2ex}{\tiny def}}}}
+\def\swedge{\mathbin{\raisebox{.2ex}{\tiny$\mathbin\wedge$}}}
+\def\svee{\mathbin{\raisebox{.2ex}{\tiny$\mathbin\vee$}}}
+
+\def\bigsum{\mathop{\mbox{\large$\displaystyle\sum$}}}
+\def\bigint{\mathop{\mbox{\large$\displaystyle\int$}}}
+
+
+\def\hookdoubleheadrightarrow{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
+
+\def\P{\EuScript P}
+\def\D{\EuScript D}
+\def\Aa{\EuScript A}
+\def\Ee{\EuScript E}
+\def\X{\EuScript X}
+\def\Y{\EuScript Y}
+\def\Z{\EuScript Z}
+\def\C{\EuScript C}
+\def\U{\EuScript U}
+%\def\H{\EuScript H}
+\def\I{\EuScript I}
+\def\V{\EuScript V}
+\def\R{\EuScript R}
+\def\F{\EuScript F}
+\def\G{\EuScript G}
+\def\B{\EuScript B}
+\def\M{\EuScript M}
+\def\Ll{\EuScript L}
+\def\K{\EuScript K}
+\def\O{\EuScript O}
+\def\J{\EuScript J}
+\def\S{\EuScript S}
+\def\<{\langle}
+\def\>{\rangle}
+\def\0{\varnothing}
+\def\theta{\vartheta}
+\def\phi{\varphi}
+\def\epsilon{\varepsilon}
+\def\ssf#1{\textsf{\footnotesize #1}}
+
+\titlecontents{section}
+[3.8em] % ie, 1.5em (chapter) + 2.3em
+{\vskip-1ex}
+{\contentslabel{1.5em}}
+{\hspace*{-2.3em}}
+{\titlerule*[1pc]{}\contentspage}
+
+
+\titleformat
+{\chapter} % command
+[display] % shape
+{\bfseries\LARGE} % format
+{Chapter \ \thechapter} % label
+{0.5ex} % sep
+{} % before-code
+[] % after-code
+\titleformat{\section}[block]{\Large\bfseries}{\makebox[5ex][r]{\textbf{\thesection}}}{1.5ex}{}
+\titlespacing*{\chapter}{0em}{.5ex plus .2ex minus .2ex}{2.3ex plus .2ex}
+\titlespacing*{\section}{-9.7ex}{3ex plus .5ex minus .5ex}{1ex plus .2ex minus .2ex}
+
+\renewcommand*\thesection{\arabic{section}}
+
+\newtheoremstyle{mio}% name
+     {2\parskip}%      Space above
+     {\parskip}%      Space below
+     {\vl}%         Body font
+     {}%         Indent amount (empty = no indent, \parindent = para indent)
+     {\bfseries}% Thm head font
+     {}%        Punctuation after thm head
+     {1.5ex}%     Space after thm head: " " = normal interword space;
+           %   \newline = linebreak
+     {\llap{\thmnumber{\vl #2}\hskip2mm}\thmname{\vl #1}\thmnote{\kern1ex\bfseries\vl #3}}% Thm head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{liscio}% name
+     {2\parskip}%      Space above
+     {0mm}%      Space below
+     {}%         Body font
+     {}%         Indent amount (empty = no indent, \parindent = para indent)
+     {\bfseries}% Thm head font
+     {}%        Punctuation after thm head
+     {1.5ex}%     Space after thm head: " " = normal interword space;
+           %   \newline = linebreak
+     {\llap{\thmnumber{#2}\hskip2mm}\thmname{#1}\thmnote{\bfseries{} #3}}% Thm head spec (can be left empty, meaning `normal')
+
+
+
+\newcounter{thm}[chapter]
+
+% \renewcommand{\thethm}{\thechapter.\arabic{thm}}
+\renewcommand{\thethm}{\arabic{thm}}
+\theoremstyle{mio}
+\newtheorem{theorem}[thm]{Theorem}
+\newtheorem{corollary}[thm]{Corollary}
+\newtheorem{proposition}[thm]{Proposition}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{definition}[thm]{Definition}
+\newtheorem{assumption}[thm]{Assumption}
+\newtheorem{void_thm}[thm]{\kern-1ex}
+\theoremstyle{liscio}
+\newtheorem{void_def}[thm]{\kern-1ex}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{notation}[thm]{Notation}
+\newtheorem{note}[thm]{Note}
+\newtheorem{exercise}[thm]{Exercise}
+\newtheorem{example}[thm]{Example}
+\setlength{\partopsep}{0mm}
+\setlength{\topsep}{0mm}
+
+\def\QED{\noindent\nolinebreak[4]\hfill\rlap{\ \ $\Box$}\medskip}
+\renewenvironment{proof}[1][Proof]%
+{\smallskip\begin{trivlist}\item[\hskip\labelsep {\bf #1}]}
+{\QED\end{trivlist}}
+
+\newenvironment{void}[1][]%
+{\begin{trivlist}\item[\hskip\labelsep {\bf #1}]}
+{\QED\end{trivlist}}
+
+
+
+\pagestyle{plain}
+
+\definecolor{violet}{RGB}{105, 5, 0}
+\definecolor{brown}{RGB}{150, 50, 10}
+\definecolor{green}{RGB}{5,100, 15}
+\def\mr{\color{brown}}
+\def\gr{\color{green}}
+\def\vl{\color{violet}}
+
+
+\def\mrA{{\mr\Aa}}
+\def\mrB{{\mr\B}}
+\def\mrC{{\mr\C}}
+\def\mrD{{\mr\D}}
+\def\grB{{\gr\B}}
+\def\grC{{\gr\C}}
+\def\grD{{\gr\D}}
+
+
+% \thickmuskip=2mu plus 0.5mu minus 0.5mu
+% \medmuskip=1mu plus 0.2mu minus 0.2mu
+\def\vc{{\footnotesize VC}}
+\def\nip{{\footnotesize NIP}}
+\def\ip{{\footnotesize IP}}
+\def\Fr{\mathop{\rm Fr}}
+\def\Var{\mathop{\rm Var}}
+\def\Ex{\mathord{\mathds E}}
+\def\Pr{\mathord{\mathds P}}
+
+\def\ns{{}^*\kern-.3ex}
+\def\cnonfork{\mathbin{\raise1.8ex\rlap{\kern0.6ex\rule{0.6ex}{0.1ex}}\rlap{\kern1.1ex\rule{0.1ex}{1.9ex}}\raise-0.3ex\hbox{$\smile$} } }
+
+\def\simfin{\mathrel{\raise-.8ex\rlap{\kern0.9ex$\scriptscriptstyle\NN$}\sim\kern.5ex }}
+
+\def\lessfin{\mathrel{\raise-.8ex\rlap{\kern0.3ex$\scriptscriptstyle\NN$}\raise.2ex\hbox{$<$} }}
+
+\def\grtfin{\mathrel{\raise-.8ex\rlap{\kern0.6ex$\scriptscriptstyle\NN$}\raise.2ex\hbox{$>$} }}
+
+
+\def\simpoly{\mathrel{\raise-.1ex\rlap{\kern0.6ex\tiny p}\raise.2ex\hbox{$\sim$} }}
+
+\def\lesspoly{\mathrel{\raise-.3ex\rlap{\kern0.4ex\tiny p}\raise.2ex\hbox{$<$} }}
+
+\def\grtpoly{\mathrel{\raise-.3ex\rlap{\kern0.7ex\tiny p}\raise.2ex\hbox{$>$} }}
+
+
+\def\simlin{\mathrel{\raise-.2ex\rlap{\kern0.6ex\tiny l}\raise.2ex\hbox{$\sim$} }}
+
+\def\lesslin{\mathrel{\raise-.5ex\rlap{\kern0.5ex\tiny l}\raise.2ex\hbox{$<$} }}
+
+\def\grtlin{\mathrel{\raise-.3ex\rlap{\kern0.7ex\tiny l}\raise.2ex\hbox{$>$} }}
+
+
+
+\def\lfin{{\mathrel{\,\raise-.6ex\rlap{\kern.3ex\sf\tiny 1}\raise.2ex\hbox{$<$}\kern.5ex }\,}}
+
+\def\simn{{\mathrel{\raise-.5ex\rlap{\kern1.0ex\it\scriptsize n}\sim\kern.5ex }}}
+
+\def\lsimn{{\mathrel{\,\raise-.4ex\rlap{\kern.4ex\it\tiny n}\raise.2ex\hbox{$<$}\kern.5ex }\,}}
+
+\def\gn{{\mathrel{\,\raise-.6ex\rlap{\kern.3ex\sf\tiny n}\raise.2ex\hbox{$>$}\kern.5ex }\,}}
+
+\begin{document}
+\raggedbottom
+% \renewcommand{\contentsname}{Pseudofinite Yoga}
+% \tableofcontents
+
+\section{Pseudofinite yoga}
+
+As a matter of personal taste I have avoided the use of ultrapowers to deal with pseudofinite structures. 
+%
+Also, I have avoided the notion of pseudofinite dimension, as it is too general for the intended applications.
+
+\def\medrel#1{\parbox[t]{5ex}{\hfil$\displaystyle #1$}}
+\def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
+For convenience, all finite models considered below have as domain a subset of $\omega$.
+%
+We say that a sentence holds in \emph{almost all finite models\/} if it holds in every finite model of sufficienly large cardinality.
+
+Let $T_0$ be a given theory with arbitrarily large finite models.
+%
+We define 
+
+\ceq{\hfill\emph{$T_{\rm fin}$}}{=}{\{\phi: M\models\phi\textrm{ for almost all finite } M\models T_0\}.}
+
+A structure $N$ is a \emph{pseudofinite\/} model of $T_0$ if $N\models T_{\rm fin}$.
+%
+This is equivalent to requiring that every sentence $\phi\in\Th(N)$ there holds in arbitrarily large finite models of $T_0$.
+%
+Note that every model of $T_{\rm fin}$ is infinite. (Other authors include in $T_{\rm fin}$ only sentences true in \textit{all\/} finite models. Hence they include the finite models among the pseudofinite ones.)
+
+We now discribe a canonical expansion of a finite model $M$ to a two sorted structure $\<M,\NN\>$.
+%
+The language of $\<M,\NN\>$ is denoted by $L'$.
+\begin{itemize}
+  \item[1.] $L'$ expands the language of $M$ and $\NN$, where $\NN$ is considered as a structure in the language with symbols for all real relations and functions of any finite arity.
+  \item[2.] $L'$ has a function $f_\phi:M^{|z|}\to\NN$ for each formula $\phi(x\,;z)\in L'$ and every finite tuples of variables $x\,;z$ of the first sort. 
+  %
+  The interpretation of $f_\phi(b)$ is the (finite) cardinality of $\phi(M\,;b)$.
+  \item[3.] (Only reqired in Section~\ref{EH}.) Let $X$ be an $n$-ary relation symbol of the first sort. 
+  %
+  Let $\phi\in L\cup\{X\}$ be a sentence.
+  %
+  Then we require that $L'$ has an $n$-ary predicate $A_\phi$ in the first sort.
+  %
+  The interpretation of $A_\phi$ is a relation of maximal cardinality that makes $\phi$ true in $M$.
+  %
+  If more then one relation satisfy the requirement above, we choose the minimal one in the lexicographic order (recall that the domain of $M$ is a subset of $\omega$).
+\end{itemize}
+
+
+
+
+Finally, we define
+
+\ceq{\hfill\emph{$T'_{\rm fin}$}}{=}{\{\phi\in L': \<M,\NN\>\models\phi\textrm{ for all finite } M\models T_0\}}.
+
+% Note that, for any given $M$, the interpretation of $A_{\phi}$ is not unique.
+% Therefore the expansion $\<M,\NN\>$ is not unique.
+% %
+% We read $\<M,\NN\>\models\phi$ as claiming that every expansion as above models $\phi$.
+
+\bigskip
+In the sequel \emph{$\<\U,\ns\NN\>$\/} denotes some arbitrary saturated model of $T'_{\rm fin}$.
+
+\begin{fact}
+  Assume that $\psi\in L'$ holds in every $\<\U,\ns\NN\>$ as above.
+  %
+  Then $\<M,\NN\>\models\psi$ for all sufficienly large finite $M\models T_0$.\QED 
+\end{fact}
+
+Below we write \emph{$\ns|\phi(x\,;b)|$\/} for $f_\phi(b)$.
+%
+We call this the \emph{pseudofinite cardinality\/} of $\phi(x\,;b)$.
+%
+By the definition of  $T'_{\rm fin}$ it is clear that the pseudofinite cardinality of a definable set $\D$ does not depend on the formula defining it, so we can unambiguously write $\ns|\D|$.
+
+
+For $r,s\in {}^*\kern-.2ex\NN$ larger than $1$ we write \emph{$r\simlin s$\/} if $r\le m\, s$ and $s\le n\,r$ for some $m,n\in\NN$. We write \emph{$r\simpoly s$\/} if $r\le s^m$ and $s\le r^n$ for some $m,n\in\NN$. 
+We write \emph{$r\lesslin s$\/} and \emph{$r\lesspoly s$\/} if $n\,r<s$, respectively $r^n< s$ for all $n\in\NN$.
+
+\begin{proposition}\label{prop_+=max}
+  Let $\sim$ denote either $\simlin$ or $\simpoly$. 
+  %
+  For every non negative $r,s\in{}^*\kern-.2ex\NN$
+
+  \ceq{\hfill r+s}
+  {\sim}
+  {\max\{r,\,s\}}
+
+  In particular, if $\D, \C\subseteq\U^{z}$ are two definable sets, then
+
+  \ceq{\hfill {}^*\kern-.2ex\big|\D\cup\C\big|}
+  {\sim}
+  {\max\big\{{}^*\kern-.2ex|\D|,\, {}^*\kern-.2ex|\C|\big\}.}
+\end{proposition} 
+
+\begin{proof}
+  In fact 
+
+\ceq{\hfill\max\{r,s\}}
+{\le}
+{r+s}
+
+\ceq{}
+{\le}
+{2\max\{r,s\}}
+
+\ceq{}
+{\le}
+{\big(\max\{r,s\}\big)^2}
+
+
+This proves the first equivalence.
+%
+The second equivalence follows.
+\end{proof}
+
+Definable sets $\D\subseteq\U^x$ such that  $\ns|\D|\sim\ns|\U^x|$ are called \emph{large,} otherwise we say they are \emph{small.}
+%
+The context will clarify if we are referring to the linear or to the polynomial equivalence.
+
+
+\begin{corollary}
+  Let $\sim$ denote either $\simlin$ or $\simpoly$.
+  %
+  Let $p(x)\subseteq L(M)$ be a type such that $\phi(\U)$ is large for every $\phi(x)$ that is conjunction of formulas in $p(x)$.
+  %
+  Then $p(x)$ has an extension to a complete type with the same property.\QED
+\end{corollary}
+
+The following fact is immediate. It is stated to illustrate the typical application of the notions introduced above.
+
+\begin{fact}\label{fact_application}
+  Let $\sim$ denote either $\simlin$ or $\simpoly$.
+  %
+  Let $\phi(x\,;z)\in L$, where $x$ has finite length.
+  % 
+  Assume that in every model $\<\U,\ns\NN\>$ there is a $b\in\U^{z}$ such that $\phi(\U^x\,;b)$ is large.
+  %
+  Then there is an $n\in\NN$ such that every sufficiently large finite $M\models T_0$ contains a tuple $c$ such that
+
+  \ceq{\hfill\big|M^x\big|}{\le}{n\,\big|\phi(M^x\,;c)\big|}\hfill if $\sim$ is $\simlin$\phantom{.}\kern25ex
+  
+  \ceq{\hfill\big|M^x\big|}{\le}{\big|\psi(M^x\,;c)\big|^n}\hfill if $\sim$ is $\simpoly$.\kern25ex\rlap{$\square$}
+
+\end{fact}
+
+The following two proposition only hold for $\simpoly$.
+
+\begin{proposition}\label{prop_+=x}
+  For every non negative $r,s\in{}^*\kern-.2ex\NN$
+
+  \ceq{\hfill r\cdot s}
+  {\simpoly}
+  {\max\{r,s\}}
+\end{proposition} 
+
+\begin{proof}
+  In fact 
+
+  \ceq{\hfill\max\{r,s\}}
+  {\le}
+  {r\cdot s}
+  
+  \ceq{}
+  {\le}
+  {\big(\max\{r,s\}\big)^2}
+\end{proof}
+
+Note that, in particular, $\ns|\U|\simpoly\ns|\U|$ for all tuples of variables of finite arity.
+
+
+\def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
+
+\begin{corollary}\label{coroll_union_small}
+  Let $\psi(x,z)\in L'$, where $x,z$ are finite tuples of variables of the first sort.
+  %
+  Let $\Aa\subseteq\U$.
+  %
+  Assume that 
+  
+  \ceq{\hfill\ns|\Aa|}{\lesspoly}{\ns|\U|}
+  
+  \ceq{\hfill\ns|\psi(a,\U^z)|}{\lesspoly}{\ns|\U|}\quad for every $a\in\Aa$.
+  
+  Then 
+  
+  \ceq{\hfill\strut^*\!\Big|\bigcup_{a\in\Aa}\psi(a,\U^z)\Big|}{\lesspoly}{\ns|\U|}.
+\end{corollary}
+
+\begin{proof}
+  Let $r=\ns|\Aa|$.
+  %
+  Let $s=\ns|\psi(a,z)|$, where $a\in\Aa$ is choosen such that $s$ is maximal.
+  %
+  Then 
+  
+  \ceq{\hfill\strut^*\!\Big|\bigcup_{a\in\Aa}\psi(a,\U^z)\Big|}{\le}{r\cdot s}
+
+
+  \ceq{}{\lesspoly}{\ns|\U|\cdot\ns|\U|}
+
+  \ceq{}{\simpoly}{\ns|\U|.}
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+\section{Erd\H{o}s-Hajnal for stable graphs}\label{EH}
+\def\ceq#1#2#3{\parbox[t]{15ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
+Let $r(\mbox{-},\mbox{-})$ be a binary relation symbol.
+%
+The theory that $T_0$ says that $r(\mbox{-},\mbox{-})$ is an irreflexive and symmetric relation (i.e.\@ a graph) and that it is $m$-stable, where $m$ is fixed but arbitrary.
+For the purpose of these notes $m$-stable means that $R_\Delta(\U)\le m$, where \emph{$R_\Delta$\/} is defined below.
+
+Let $\Delta=\{r(a,x) :\, a\in\U\}$.
+%
+Let $\S\subseteq\U$.
+%
+We denote by $R_\Delta\big(\S\big)$ the Shelah binary rank of $\S$.
+%
+That is, the maximal height $n$ of binary tree of $\pmDelta$-formulas $\<\phi_i(x)\,:\, s\in {}^{<n}2\>$ such that for every $s\in {}^{n}2$ the type 
+
+\ceq{\hfill }
+{}
+{\big\{\neg^{s_i}\,\phi_{s\restriction i}(x)\, :\, i\le n\big\}}
+
+has a solution in $\S$.
+
+As $T_0$ is stable, $R_\Delta\big(\U\big)$ is finite.
+%
+Among the large $L(\U)$-definable subsets of $\U$ we fix one, say \emph{$\S=\sigma(\U)$}, such that $R_\Delta\big(\S\big)$ is minimal.
+
+\begin{fact}
+  For every $\pmDelta$-definable set $\D\subseteq\U$, exactly one between $\S\cap\D$ and $\S\cap\neg\D$ is large.
+\end{fact}
+
+\begin{proof}
+  As $\S$ is large, at least one between $\S\cap\D$ and $\S\cap\neg\D$ is large by Proposition~\ref{prop_+=max}.
+  Now, suppose for a contradiction that they both are large.
+  Let $n=R_\Delta\big(\S\big)$.
+  By the minimality of $n$, both $\S\cap\D$ and $\S\cap\neg\D$ have rank $n$.
+  This contradicts the definition of rank.
+\end{proof}
+
+\begin{theorem}
+  There is a large set $\Aa\subseteq\U$ that is either a clique or an anticlique.
+\end{theorem}
+
+\begin{proof}
+  Let $\S=\sigma(\U)$ be as defined above.
+  %
+  Let $p(x)\subseteq\pmDelta$ be maximally consistent among the $\pmDelta$-types such that $\sigma(x)\wedge\phi(x)$ is large for every conjunction of formulas in the type.
+  %
+  By the fact above, $p(x)$ is $\pmDelta$-complete, i.e.\@ either $\phi(x)$ or $\neg\phi(x)$ is in $p(x)$ for every $\phi(x)\in\pmDelta$.
+
+  % Moreover, by compactness, $R_\Delta\big(\S\big)=R_\Delta\big(p(\U)\cap\S\big)$.
+
+  Let $\B=\{a\in\S\ :\ r(a,x)\in p\}$.
+  %
+  By stability, $\B$ is definable in $L(\U)$.
+  %
+  At least one between $\B$ and $\S\sm\B$ is large.
+  %
+  Assume the first, the argument when $\S\sm\B$ is large is similar.
+
+  Let $\Aa$ be a definable subsets of $\B$ that is maximal among those that satisfy the formula $\big(\A x,y\in\Aa\big)\,r(x,y)$.
+  %
+  The definition of $L'$ guarantees that such a set exists.
+  
+  We claim that $\Aa$ is large, hence it is the clique required by the theorem.
+  %
+  So, assume not, and reason for a contradiction.
+
+  By the maximality of $\Aa$, for every $b\in\B\sm\Aa$ there is an $a\in\Aa$ such that $\neg r(a,b)$.
+  %
+  We rephrase this as the inclusion
+
+  \ceq{\hfill\B\sm\Aa}
+  {\subseteq}
+  {\bigcup_{a\in\Aa}\neg r(a,\S)}
+
+  By assumption $\Aa$ is not large, hence $\B\sm\Aa$ is large.
+  %
+  When $a\in\Aa$, in particular $r(a,x)\in p$.
+  Therefore, by the fact above, $r(a,\S)$ is large and $\neg r(a,\S)$ is small.
+  This is a contradiction by Corollary~\ref{coroll_union_small}.
+\end{proof}
+
+Finally the Erd\H{o}s-Hajnal property is obtained applying Fact~\ref{fact_application}.
+
+\begin{corollary}
+  There is an $n$ such that in every finite model $M\models T_0$ there is a set $A\subseteq M$ of cardinality at least $|M|^{1/n}$ that is either a clique or an anticlique.\QED
+\end{corollary}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pseudofinite counting measure}
+
+\def\ceq#1#2#3{\parbox[t]{10ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
+Below, $T_0$, $\Delta$, $m=R_\Delta$ are as defined the provious section.
+
+Let $\D\subseteq\U$ be a definable set.
+%
+We define
+
+\ceq{\hfill\mu(\D)}
+{=}
+{\inf\Big\{\frac{m}{n}\ :\ m,n\in\NN\sm\{0\} \text{ such that } n\,\ns|\D|\le m\,\ns|\U|\Big\}},
+
+where the infimum is taken in $\NN$.
+%
+It is immediate that $\mu(\mbox{-})$ is a finite probability measure on the definable subsets of $\U$.
+
+We will write \emph{$\Aa=_\mu\D$} if $\mu(\Aa\simdiff\D)=0$.
+
+\begin{lemma}\label{lem_atoms}
+  There are some pairwise disjoint $\{\wedge\}\pmDelta$-definable sets $\B_0,\dots,\B_{n-1}\subseteq\U$, where $n\le2^m$, such that for any $\{{\wedge}{\vee}{\neg}\}\Delta$-definable set $\Aa$, 
+  
+  \ceq{\hfill\Aa}{=_\mu}{\bigcup_{i\in I}\B_i}
+
+  Per qualche $I\subseteq n$.
+  %
+  Finally, we can require that all $\B_i$ have positive measure.  
+\end{lemma}
+
+\begin{proof}
+  We prove a slightly more general claim.
+  %
+  For any definable set $\D$ of positive measure let $\mu_\D$ be the contitional measure:
+
+  \ceq{\hfill\mu_\D(\Aa)}
+  {=}
+  {\mu(\Aa|\D)}
+
+  \ceq{}
+  {=}
+  {\frac{\mu(\Aa\cap\D)}{\mu(\D)}}
+
+  We prove by induction on $R_\Delta(\D)=m$ that there are $n\le 2^m$ many $\{\wedge\}\pmDelta$-definable sets $\B_i$ such that
+
+  \ceq{\hfill\Aa}{=_\mu}{\bigcup_{i\in I}\B_i}
+
+  For some $I\subseteq n$.
+  %
+  Clearly it suffices to consider $\Aa\subseteq\D$ that are $\{\wedge\}\pmDelta$-definable. 
+
+  If  $R_\Delta(\D)=0$ then $\D$ is either disjoint of contained in every $\pmDelta$-definable set.
+  So the claim holds trivially.
+
+  Now, let $R_\Delta(\D)=m+1$.
+  By the definition of binary rank, there is a $\Delta$-definable set $\B$ such that $R_\Delta(\D\cap\B)=R_\Delta(\D\cap\neg\B)=m$.
+  Apply the induction hypothesis to $\D\cap\B$ if it has positive measure. 
+  Do the same for $\D\cap\neg\B$.
+  Note that at least one has positive measure.
+\end{proof}
+ 
+Non sono sicuro questa sia la corretta traduzione finita.
+
+\begin{corollary}
+  For every $\epsilon>0$ there is an $N=N(\epsilon)$ such that for every finite $M\models T_0$ of cardinality larger than $N$, there are $B_0,\dots,B_{n-1}\subseteq M$, where $n\le2^m$ and $\mu(B_i)>\epsilon$, such that for every $\{{\wedge}{\vee}{\neg}\}\Delta$-definable set $A\subseteq M$ there is an $I\subseteq n$ such that 
+
+  \ceq{\hfill\epsilon}
+  {>}
+  {\mu\bigg(A\simdiff\bigcup_{i\in I}B_i\bigg)}
+\end{corollary}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Stable Szemer\'edi regularity lemma}
+
+\begin{lemma}
+  Assume that $r(\mbox{-},\mbox{-})$ is stable and let $m=R_\Delta(\U)$.
+  There are two partitions of $\U$, say $\B_0,\dots,\B_n$, where $n\le 2^m$, and $\C_1,\dots,\C_{2^n}\subseteq\U$ such that for all $i,j$ either $r(\B_i,\C_j)=_\mu\0$ or $r(\B_i,\C_j)=_\mu\B_i\times\C_j$.
+\end{lemma}
+
+\begin{proof}
+  Let $\B_0,\dots,\B_{n-1}$ be the sets given by Lemma~\ref{lem_atoms} and define
+
+  \ceq{\hfill\B_n}
+  {=}
+  {\U\sm\bigcup_{i=0}^{n-1}\B_i.}
+  
+  For every $J\subseteq n$ let 
+  
+  \ceq{\hfill \C_J}{=}{\Big\{c\in\U\ :\ \ \bigcup_{i\in J}\B_i\;=_\mu r(\U,c)\Big\}}
+
+  By Lemma~\ref{lem_atoms} if $i\in J$ then $r(\B_i,\C_J)=_\mu\B_i\times\C_J$, otherwise $r(\B_i,\C_J)=_\mu\0$.
+
+  It is only left to verify the lemma for $r(\B_n,\C_J)$.
+  %
+  Indeed, as $\B_n=_\mu\0$ by Lemma~\ref{lem_atoms}, we have that $r(\B_n,\C_J)\ \subseteq\ \B_n\times\U\ =_\mu\0$.
+\end{proof}
+
+Finally, the the stable Szemer\'edi regularity lemma is obtained applying Fact~\ref{fact_application}.
+
+\begin{corollary}
+  Assume that $r(\mbox{-},\mbox{-})$ is stable and let $m=R_\Delta(\U)$.
+  Then for every positive $\epsilon$ and every finite model $M$, there are two partitions of $M$, say $B_0,\dots,B_n$, where $n\le 2^m$, and $C_1,\dots,C_{2^n}$ such that 
+  
+  
+  \ceq{\hfill r(B_i,C_j)}{\le}{\epsilon |B_i\times C_j|}
+
+  \smallskip
+  \ceq{\hfill r(B_i,C_j)}{\ge}{\epsilon |B_i\times C_j|.}
+  \QED
+\end{corollary}
+
+
+\end{document}
