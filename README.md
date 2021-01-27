@@ -1,1 +1,3 @@
-# pseudofinite
+# Pseudofinite
+
+Experiments with pseudofinite structures.
