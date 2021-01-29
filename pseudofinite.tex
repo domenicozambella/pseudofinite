@@ -25,6 +25,7 @@
 %\usepackage[adobe-utopia]{mathdesign}
 \usepackage{graphicx}
 \usepackage{tikz-cd}
+\usetikzlibrary{shapes.geometric}
 \tikzcdset{
 arrow style=tikz,
 diagrams={>=latex}
@@ -299,7 +300,7 @@ diagrams={>=latex}
 \def\grtpoly{\mathrel{\raise-.3ex\rlap{\kern0.7ex\tiny p}\raise.2ex\hbox{$>$} }}
 
 
-\def\simlin{\mathrel{\raise-.2ex\rlap{\kern0.6ex\tiny l}\raise.2ex\hbox{$\sim$} }}
+\def\simlin{\mathrel{\raise-.3ex\rlap{\kern0.6ex\tiny l}\raise.2ex\hbox{$\sim$} }}
 
 \def\lesslin{\mathrel{\raise-.5ex\rlap{\kern0.5ex\tiny l}\raise.2ex\hbox{$<$} }}
 
@@ -320,14 +321,24 @@ diagrams={>=latex}
 % \renewcommand{\contentsname}{Pseudofinite Yoga}
 % \tableofcontents
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Pseudofinite yoga}
+\def\medrel#1{\parbox[t]{5ex}{\hfil$\displaystyle #1$}}
+\def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
 
 As a matter of personal taste I have avoided the use of ultrapowers to deal with pseudofinite structures. 
 %
 Also, I have avoided the notion of pseudofinite dimension, as it is too general for the intended applications.
 
-\def\medrel#1{\parbox[t]{5ex}{\hfil$\displaystyle #1$}}
-\def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
 
 For convenience, all finite models considered below have as domain a subset of $\omega$.
 %
@@ -484,7 +495,7 @@ The following two proposition only hold for $\simpoly$.
   {\big(\max\{r,s\}\big)^2}
 \end{proof}
 
-Note that, in particular, $\ns|\U|\simpoly\ns|\U|$ for all tuples of variables of finite arity.
+Note that, in particular, $\ns|\U|\simpoly\ns|\U^x|$ for all tuples of variables of finite arity.
 
 
 \def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
@@ -534,7 +545,7 @@ Let $r(\mbox{-},\mbox{-})$ be a binary relation symbol.
 The theory that $T_0$ says that $r(\mbox{-},\mbox{-})$ is an irreflexive and symmetric relation (i.e.\@ a graph) and that it is $m$-stable, where $m$ is fixed but arbitrary.
 For the purpose of these notes $m$-stable means that $R_\Delta(\U)\le m$, where \emph{$R_\Delta$\/} is defined below.
 
-Let $\Delta=\{r(a,x) :\, a\in\U\}$.
+Let \emph{$\Delta$} $=\{r(a,x) :\, a\in\U\}$.
 %
 Let $\S\subseteq\U$.
 %
@@ -615,12 +626,16 @@ Finally the Erd\H{o}s-Hajnal property is obtained applying Fact~\ref{fact_applic
 \end{corollary}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Pseudofinite counting measure}
 
-\def\ceq#1#2#3{\parbox[t]{10ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+\def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
 
-Below, $T_0$, $\Delta$, $m=R_\Delta$ are as defined the provious section.
+Below, the theory $T_0$, the set of formulas $\Delta$, and the rank $m=R_\Delta$ are as defined the provious section.
 
 Let $\D\subseteq\U$ be a definable set.
 %
@@ -630,9 +645,11 @@ We define
 {=}
 {\inf\Big\{\frac{m}{n}\ :\ m,n\in\NN\sm\{0\} \text{ such that } n\,\ns|\D|\le m\,\ns|\U|\Big\}},
 
-where the infimum is taken in $\NN$.
+where the infimum is taken in $\RR$.
 %
 It is immediate that $\mu(\mbox{-})$ is a finite probability measure on the definable subsets of $\U$.
+%
+(By the Caratheodory Theorem it can be extended to a probability measure but this is not required here.)
 
 We will write \emph{$\Aa=_\mu\D$} if $\mu(\Aa\simdiff\D)=0$.
 
@@ -676,15 +693,16 @@ We will write \emph{$\Aa=_\mu\D$} if $\mu(\Aa\simdiff\D)=0$.
   Do the same for $\D\cap\neg\B$.
   Note that at least one has positive measure.
 \end{proof}
- 
+
+\noindent\llap{\Large\color{red}\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax\ }%
 Non sono sicuro questa sia la corretta traduzione finita.
 
 \begin{corollary}
-  For every $\epsilon>0$ there is an $N=N(\epsilon)$ such that for every finite $M\models T_0$ of cardinality larger than $N$, there are $B_0,\dots,B_{n-1}\subseteq M$, where $n\le2^m$ and $\mu(B_i)>\epsilon$, such that for every $\{{\wedge}{\vee}{\neg}\}\Delta$-definable set $A\subseteq M$ there is an $I\subseteq n$ such that 
+  For every $\epsilon>0$ there is an $k$ such that for every finite $M\models T_0$ of cardinality larger than $k$, there are some disjoint sets $B_0,\dots,B_{n-1}\subseteq M$, where $n\le2^m$ and $\mu(B_i)>\epsilon$, such that for every $\{{\wedge}{\vee}{\neg}\}\Delta$-definable set $A\subseteq M$ there is an $I\subseteq n$ such that 
 
   \ceq{\hfill\epsilon}
   {>}
-  {\mu\bigg(A\simdiff\bigcup_{i\in I}B_i\bigg)}
+  {\mu\bigg(A\simdiff\bigcup_{i\in I}B_i\bigg).}
 \end{corollary}
 
 
@@ -693,9 +711,10 @@ Non sono sicuro questa sia la corretta traduzione finita.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Stable Szemer\'edi regularity lemma}
 
+Below, the theory $T_0$, the set of formulas $\Delta$, and the rank $m=R_\Delta$ are as defined in Section~\ref{EH}.
+
 \begin{lemma}
-  Assume that $r(\mbox{-},\mbox{-})$ is stable and let $m=R_\Delta(\U)$.
-  There are two partitions of $\U$, say $\B_0,\dots,\B_n$, where $n\le 2^m$, and $\C_1,\dots,\C_{2^n}\subseteq\U$ such that for all $i,j$ either $r(\B_i,\C_j)=_\mu\0$ or $r(\B_i,\C_j)=_\mu\B_i\times\C_j$.
+  There are two partitions of $\U$, say $\B_0,\dots,\B_n$, where $n\le 2^m$, and $\C_1,\dots,\C_{2^n}$ such that for all $i,j$ either $r(\B_i,\C_j)=_\mu\0$ or $r(\B_i,\C_j)=_\mu\B_i\times\C_j$.
 \end{lemma}
 
 \begin{proof}
@@ -718,15 +737,16 @@ Non sono sicuro questa sia la corretta traduzione finita.
 
 Finally, the the stable Szemer\'edi regularity lemma is obtained applying Fact~\ref{fact_application}.
 
-\begin{corollary}
-  Assume that $r(\mbox{-},\mbox{-})$ is stable and let $m=R_\Delta(\U)$.
-  Then for every positive $\epsilon$ and every finite model $M$, there are two partitions of $M$, say $B_0,\dots,B_n$, where $n\le 2^m$, and $C_1,\dots,C_{2^n}$ such that 
-  
-  
-  \ceq{\hfill r(B_i,C_j)}{\le}{\epsilon |B_i\times C_j|}
 
-  \smallskip
-  \ceq{\hfill r(B_i,C_j)}{\ge}{\epsilon |B_i\times C_j|.}
+\noindent\llap{\Large\color{red}\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax\ }%
+Sembra troppo forte. Non dev'essere la traduzione al finito giusta.
+
+\begin{corollary} 
+  For every $\epsilon>0$ there is an $k$ such that for every finite $M\models T_0$ of cardinality larger than $k$, there are two partitions of $M$, say $B_0,\dots,B_n$, where $n\le 2^m$, and $C_1,\dots,C_{2^n}$, such that one of the following obtains
+
+  \ceq{\hfill |r(B_i,C_j)|}{\le}{\epsilon\, |B_i\times C_j|}
+
+  \ceq{\hfill |r(B_i,C_j)|}{\ge}{(1-\epsilon)\, |B_i\times C_j|.}
   \QED
 \end{corollary}
 
