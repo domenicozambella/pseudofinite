@@ -281,7 +281,8 @@ diagrams={>=latex}
 \def\Fr{\mathop{\rm Fr}}
 \def\Var{\mathop{\rm Var}}
 \def\Ex{\mathord{\mathds E}}
-\def\Pr{\mathord{\mathds P}}
+% \def\Pr{\mathord{\mathds P}}
+
 
 \def\ns{{}^*\kern-.3ex}
 \def\cnonfork{\mathbin{\raise1.8ex\rlap{\kern0.6ex\rule{0.6ex}{0.1ex}}\rlap{\kern1.1ex\rule{0.1ex}{1.9ex}}\raise-0.3ex\hbox{$\smile$} } }
@@ -306,15 +307,8 @@ diagrams={>=latex}
 
 \def\grtlin{\mathrel{\raise-.3ex\rlap{\kern0.7ex\tiny l}\raise.2ex\hbox{$>$} }}
 
+\def\eqPr{\mathrel{\raise-.6ex\rlap{\kern0.3ex\tiny Pr}\raise.1ex\hbox{$=$\,} }}
 
-
-\def\lfin{{\mathrel{\,\raise-.6ex\rlap{\kern.3ex\sf\tiny 1}\raise.2ex\hbox{$<$}\kern.5ex }\,}}
-
-\def\simn{{\mathrel{\raise-.5ex\rlap{\kern1.0ex\it\scriptsize n}\sim\kern.5ex }}}
-
-\def\lsimn{{\mathrel{\,\raise-.4ex\rlap{\kern.4ex\it\tiny n}\raise.2ex\hbox{$<$}\kern.5ex }\,}}
-
-\def\gn{{\mathrel{\,\raise-.6ex\rlap{\kern.3ex\sf\tiny n}\raise.2ex\hbox{$>$}\kern.5ex }\,}}
 
 \begin{document}
 \raggedbottom
@@ -641,48 +635,36 @@ Let $\D\subseteq\U$ be a definable set.
 %
 We define
 
-\ceq{\hfill\mu(\D)}
+\ceq{\hfill\Pr(\D)}
 {=}
 {\inf\Big\{\frac{m}{n}\ :\ m,n\in\NN\sm\{0\} \text{ such that } n\,\ns|\D|\le m\,\ns|\U|\Big\}},
 
 where the infimum is taken in $\RR$.
 %
-It is immediate that $\mu(\mbox{-})$ is a finite probability measure on the definable subsets of $\U$.
+It is immediate that $\Pr(\mbox{-})$ is a finite probability measure on the definable subsets of $\U$.
 %
 (By the Caratheodory Theorem it can be extended to a probability measure but this is not required here.)
 
-We will write \emph{$\Aa=_\mu\D$} if $\mu(\Aa\simdiff\D)=0$.
+We will write \emph{$\Aa\eqPr\D$} if $\Pr(\Aa\simdiff\D)=0$.
 
 \begin{lemma}\label{lem_atoms}
-  There are some pairwise disjoint $\{\wedge\}\pmDelta$-definable sets $\B_0,\dots,\B_{n-1}\subseteq\U$, where $n\le2^m$, such that for any $\{{\wedge}{\vee}{\neg}\}\Delta$-definable set $\Aa$, 
+  There are some $\{\wedge\}\pmDelta$-definable sets $\B_1,\dots,\B_n\subseteq\U$, where $n\le2^m$, such that for any $\{\wedge\}\pmDelta$-definable set $\Aa$, 
   
-  \ceq{\hfill\Aa}{=_\mu}{\bigcup_{i\in I}\B_i}
+  \ceq{\hfill\Aa}{\eqPr}{\bigcup_{i\in I}\B_i,}
 
-  Per qualche $I\subseteq n$.
+  per qualche $I\subseteq n$.
   %
-  Finally, we can require that all $\B_i$ have positive measure.  
+  Also, we can require that all $\B_i$ have positive measure and that they form a partition $\U$.
 \end{lemma}
 
 \begin{proof}
   We prove a slightly more general claim.
   %
-  For any definable set $\D$ of positive measure let $\mu_\D$ be the contitional measure:
-
-  \ceq{\hfill\mu_\D(\Aa)}
-  {=}
-  {\mu(\Aa|\D)}
-
-  \ceq{}
-  {=}
-  {\frac{\mu(\Aa\cap\D)}{\mu(\D)}}
-
-  We prove by induction on $R_\Delta(\D)=m$ that there are $n\le 2^m$ many $\{\wedge\}\pmDelta$-definable sets $\B_i$ such that
-
-  \ceq{\hfill\Aa}{=_\mu}{\bigcup_{i\in I}\B_i}
-
-  For some $I\subseteq n$.
+  Let $\D$ be a definable set of positive measure.
   %
-  Clearly it suffices to consider $\Aa\subseteq\D$ that are $\{\wedge\}\pmDelta$-definable. 
+  By induction on $R_\Delta(\D)=m$ we prove that there are $n\le 2^m$ many $\{\wedge\}\pmDelta$-definable sets $\B_i\subseteq\D$ such that for every $\{\wedge\}\pmDelta$-definable $\Aa\subseteq\D$ there is an $I\subseteq n$
+
+  \ceq{\hfill\Aa}{\eqPr}{\bigcup_{i\in I}\B_i.}
 
   If  $R_\Delta(\D)=0$ then $\D$ is either disjoint of contained in every $\pmDelta$-definable set.
   So the claim holds trivially.
@@ -692,17 +674,21 @@ We will write \emph{$\Aa=_\mu\D$} if $\mu(\Aa\simdiff\D)=0$.
   Apply the induction hypothesis to $\D\cap\B$ if it has positive measure. 
   Do the same for $\D\cap\neg\B$.
   Note that at least one has positive measure.
+
+  It is evident that the sets $\B_i$ obtained in the construction above are disjoint and have positive measure.
+  Also, they cover $\U$ up to a set of measure $0$.
+  Hence, replacing $\B_1$ with some $\B'_1\eqPr\B_1$ we obtain an actual cover of $\U$.
 \end{proof}
 
 \noindent\llap{\Large\color{red}\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax\ }%
-Non sono sicuro questa sia la corretta traduzione finita.
+Non sono sicuro questa qui sotto sia la corretta traduzione finita.
 
 \begin{corollary}
-  For every $\epsilon>0$ there is an $k$ such that for every finite $M\models T_0$ of cardinality larger than $k$, there are some disjoint sets $B_0,\dots,B_{n-1}\subseteq M$, where $n\le2^m$ and $\mu(B_i)>\epsilon$, such that for every $\{{\wedge}{\vee}{\neg}\}\Delta$-definable set $A\subseteq M$ there is an $I\subseteq n$ such that 
+  For every $\epsilon>0$ there is an $k$ such that for every finite $M\models T_0$ of cardinality larger than $k$, there is a partition of $M$, say $B_0,\dots,B_{n-1}\subseteq M$, where $n\le2^m$ such that $|B_i|>\epsilon\,|M|$ and for every $\{\wedge\}\pmDelta$-definable set $A\subseteq M$ there is an $I\subseteq n$ such that 
 
-  \ceq{\hfill\epsilon}
-  {>}
-  {\mu\bigg(A\simdiff\bigcup_{i\in I}B_i\bigg).}
+  \ceq{\hfill\bigg|A\simdiff\bigcup_{i\in I}B_i\bigg|}
+  {<}
+  {\epsilon\,|M|.}
 \end{corollary}
 
 
@@ -714,39 +700,48 @@ Non sono sicuro questa sia la corretta traduzione finita.
 Below, the theory $T_0$, the set of formulas $\Delta$, and the rank $m=R_\Delta$ are as defined in Section~\ref{EH}.
 
 \begin{lemma}
-  There are two partitions of $\U$, say $\B_0,\dots,\B_n$, where $n\le 2^m$, and $\C_1,\dots,\C_{2^n}$ such that for all $i,j$ either $r(\B_i,\C_j)=_\mu\0$ or $r(\B_i,\C_j)=_\mu\B_i\times\C_j$.
+  There are two partitions of $\U$, say $\B_1,\dots,\B_n$, where $n\le 2^m$, and $\C_1,\dots,\C_{2^n}$ such that for all $i,j$ either $r(\B_i,\C_j)\eqPr\0$ or $r(\B_i,\C_j)\eqPr\B_i\times\C_j$.
 \end{lemma}
 
 \begin{proof}
-  Let $\B_0,\dots,\B_{n-1}$ be the sets given by Lemma~\ref{lem_atoms} and define
-
-  \ceq{\hfill\B_n}
-  {=}
-  {\U\sm\bigcup_{i=0}^{n-1}\B_i.}
+  Let $\B_1,\dots,\B_n$ be the sets given by Lemma~\ref{lem_atoms}. For every $J\subseteq n$ let 
   
-  For every $J\subseteq n$ let 
-  
-  \ceq{\hfill \C_J}{=}{\Big\{c\in\U\ :\ \ \bigcup_{i\in J}\B_i\;=_\mu r(\U,c)\Big\}}
+  \ceq{\hfill \C_J}{=}{\Big\{c\in\U\ :\ \ \bigcup_{i\in J}\B_i\;\eqPr r(\U,c)\Big\}}
 
-  By Lemma~\ref{lem_atoms} if $i\in J$ then $r(\B_i,\C_J)=_\mu\B_i\times\C_J$, otherwise $r(\B_i,\C_J)=_\mu\0$.
-
-  It is only left to verify the lemma for $r(\B_n,\C_J)$.
-  %
-  Indeed, as $\B_n=_\mu\0$ by Lemma~\ref{lem_atoms}, we have that $r(\B_n,\C_J)\ \subseteq\ \B_n\times\U\ =_\mu\0$.
+  By Lemma~\ref{lem_atoms} if $i\in J$ then $r(\B_i,\C_J)\eqPr\B_i\times\C_J$, otherwise $r(\B_i,\C_J)\eqPr\0$.
 \end{proof}
+
+For $\Aa,\B\subseteq\U$, it is usual call \emph{density\/} the conditional probability
+
+\ceq{\hfill\emph{$d(\Aa,\B)$}}
+{=}
+{\Pr\Big(r(\Aa,\B)\ \big|\ \Aa{\times}\B\Big)}
+
+\ceq{}
+{=}
+{\frac{\Pr\big(r(\Aa,\B)\big)}{\Pr(\Aa{\times}\B)}}
+
+This definition is given with the proviso that $\Aa$ and $\B$ have non zero probability.
+%
+The same notation is used for nonempty subsets $A,B\subseteq M$ of a finite model
+
+\ceq{\hfill\emph{$d(A,B)$}}
+{=}
+{\frac{\big|r(A,B)\big|}{|A|\cdot|B|}}
+
+\begin{corollary}
+  There is a partition of $\U$ into sets of positive measure $\D_1,\dots,\D_n$, where $n\le2^{2^m+1}$ such that for all $i,j$ either $d(\D_i, \D_j)=0$ or $d(\D_i, \D_j)=1$.
+\end{corollary}
+
 
 Finally, the the stable Szemer\'edi regularity lemma is obtained applying Fact~\ref{fact_application}.
 
 
 \noindent\llap{\Large\color{red}\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax\ }%
-Sembra troppo forte. Non dev'essere la traduzione al finito giusta.
+Il corollario qui sotto sembra troppo forte perch\'e $n$ non dipende da $\epsilon$. Non dev'essere la traduzione al finito giusta.
 
 \begin{corollary} 
-  For every $\epsilon>0$ there is an $k$ such that for every finite $M\models T_0$ of cardinality larger than $k$, there are two partitions of $M$, say $B_0,\dots,B_n$, where $n\le 2^m$, and $C_1,\dots,C_{2^n}$, such that one of the following obtains
-
-  \ceq{\hfill |r(B_i,C_j)|}{\le}{\epsilon\, |B_i\times C_j|}
-
-  \ceq{\hfill |r(B_i,C_j)|}{\ge}{(1-\epsilon)\, |B_i\times C_j|.}
+  For every $\epsilon>0$ there is an $k$ such that for every finite $M\models T_0$ of cardinality larger than $k$, there is a partitions of $M$, say $D_1,\dots,D_n$, where $n\le2^{2^m+1}$ such that for all $i,j$ either $d(D_i,D_j)<\epsilon$ or $d(D_i,D_j)>1-\epsilon$.
   \QED
 \end{corollary}
 
