@@ -24,8 +24,13 @@
 %\usepackage{eulervm}
 %\usepackage[adobe-utopia]{mathdesign}
 \usepackage{graphicx}
-\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\usepgfplotslibrary{polar}
 \usetikzlibrary{shapes.geometric}
+\usetikzlibrary{calc}
+\pgfplotsset{width=10cm,compat=1.9}
+\usepackage{tikz}
+\usepackage{tikz-cd}
 \tikzcdset{
 arrow style=tikz,
 diagrams={>=latex}
@@ -346,7 +351,7 @@ We define
 
 A structure $N$ is a \emph{pseudofinite\/} model of $T_0$ if $N\models T_{\rm fin}$.
 %
-This is equivalent to requiring that every sentence $\phi\in\Th(N)$ there holds in arbitrarily large finite models of $T_0$.
+This is equivalent to requiring that every sentence $\phi\in\Th(N)$ holds in arbitrarily large finite models of $T_0$.
 %
 Note that every model of $T_{\rm fin}$ is infinite. (Other authors include in $T_{\rm fin}$ only sentences true in \textit{all\/} finite models. Hence they include the finite models among the pseudofinite ones.)
 
@@ -695,12 +700,12 @@ Non sono sicuro questa qui sotto sia la corretta traduzione finita.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Stable Szemer\'edi regularity lemma}
+\section{Stable Szemer\'edi's regularity}
 
 Below, the theory $T_0$, the set of formulas $\Delta$, and the rank $m=R_\Delta$ are as defined in Section~\ref{EH}.
 
 \begin{lemma}
-  There are two partitions of $\U$, say $\B_1,\dots,\B_n$, where $n\le 2^m$, and $\C_1,\dots,\C_{2^n}$ such that for all $i,j$ either $r(\B_i,\C_j)\eqPr\0$ or $r(\B_i,\C_j)\eqPr\B_i\times\C_j$.
+  There are two partitions of $\U$, say $\B_1,\dots,\B_n$, where $n\le 2^m$, and $\C_1,\dots,\C_{2^n}$, such that for all $i,j$ either $r(\B_i,\C_j)\eqPr\0$ or $r(\B_i,\C_j)\eqPr\B_i\times\C_j$.
 \end{lemma}
 
 \begin{proof}
@@ -744,6 +749,5 @@ Il corollario qui sotto sembra troppo forte perch\'e $n$ non dipende da $\epsilo
   For every $\epsilon>0$ there is an $k$ such that for every finite $M\models T_0$ of cardinality larger than $k$, there is a partitions of $M$, say $D_1,\dots,D_n$, where $n\le2^{2^m+1}$ such that for all $i,j$ either $d(D_i,D_j)<\epsilon$ or $d(D_i,D_j)>1-\epsilon$.
   \QED
 \end{corollary}
-
 
 \end{document}
