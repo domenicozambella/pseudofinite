@@ -85,6 +85,7 @@ diagrams={>=latex}
 \def\BB{\mathds B}
 \def\CC{\mathds C}
 \def\PP{\mathds P}
+\def\Indicator{\mathds I}
 \def\Ar{{\rm Ar}}
 \def\dom{\mathop{\rm dom}}
 \def\range{\mathop{\rm range}}
@@ -338,9 +339,6 @@ As a matter of personal taste I have avoided the use of ultrapowers to deal with
 Also, I have avoided the notion of pseudofinite dimension, as it is too general for the intended applications.
 
 
-
-For convenience, all finite models considered below have as domain a subset of $\omega$.
-%
 We say that a sentence holds in \emph{almost all finite models\/} if it holds in every finite model of sufficienly large cardinality.
 
 Let $T_0$ be a given theory with arbitrarily large finite models.
@@ -363,21 +361,13 @@ The language of $\<M,\NN\>$ is denoted by $L'$.
   \item[2.] $L'$ has a function $f_\phi:M^{|z|}\to\NN$ for each formula $\phi(x\,;z)\in L'$ and every finite tuples of variables $x\,;z$ of the first sort. 
   %
   The interpretation of $f_\phi(b)$ is the (finite) cardinality of $\phi(M\,;b)$.
-  \item[3.] (Only reqired in Section~\ref{EH}.) Let $X$ be an $n$-ary relation symbol of the first sort. 
-  %
-  Let $\phi\in L\cup\{X\}$ be a sentence.
-  %
-  Then we require that $L'$ has an $n$-ary predicate $A_\phi$ in the first sort.
-  %
-  The interpretation of $A_\phi$ is a relation of maximal cardinality that makes $\phi$ true in $M$.
-  %
-  If more then one relation satisfy the requirement above, we choose the minimal one in the lexicographic order (recall that the domain of $M$ is a subset of $\omega$).
 \end{itemize}
 
+For some application a richer language will be necessary (cfr.\@ Section~\ref{EH} below).
+%
+Other times we even need to expand $M$ with a few more sorts (cfr.\@ Section~\ref{samples} below).
 
-
-
-Finally, we define
+We define
 
 \ceq{\hfill\emph{$T'_{\rm fin}$}}{=}{\{\phi\in L': \<M,\NN\>\models\phi\textrm{ for all finite } M\models T_0\}}.
 
@@ -401,9 +391,14 @@ We call this the \emph{pseudofinite cardinality\/} of $\phi(x\,;b)$.
 %
 By the definition of  $T'_{\rm fin}$ it is clear that the pseudofinite cardinality of a definable set $\D$ does not depend on the formula defining it, so we can unambiguously write $\ns|\D|$.
 
-
-For $r,s\in {}^*\kern-.2ex\NN$ larger than $1$ we write \emph{$r\simlin s$\/} if $r\le m\, s$ and $s\le n\,r$ for some $m,n\in\NN$. We write \emph{$r\simpoly s$\/} if $r\le s^m$ and $s\le r^n$ for some $m,n\in\NN$. 
-We write \emph{$r\lesslin s$\/} and \emph{$r\lesspoly s$\/} if $n\,r<s$, respectively $r^n< s$ for all $n\in\NN$.
+We will need two preorder relations (a.k.a.\@ quasiorders) on ${}^*\kern-.2ex\NN\sm\{0,1\}$. We say that the fist \emph{linear\/} the second \emph{polynomial.} For $r,s\in {}^*\kern-.2ex\NN\sm\{0,1\}$
+\begin{itemize}
+  \item[1.]we write \emph{$r\leq_{\rm l }s$\/} if $r\le n\,s$ for some positive $n\in\NN$.
+  \item[2.]we write \emph{$r\leq_{\rm p} s$\/} if $r\le s^n$ for some positive $n\in\NN$.
+\end{itemize} 
+The associated equivalence relation are denoted by\emph{$r\simlin s$\/} and \emph{$r\simpoly s$\/ }. 
+%
+Also, we write \emph{$r\lesslin s$\/} and \emph{$r\lesspoly s$\/} for the associated strict order, i.e.\@ if $n\,r<s$, respectively $r^n< s$ for all $n\in\NN$.
 
 \begin{proposition}\label{prop_+=max}
   Let $\sim$ denote either $\simlin$ or $\simpoly$. 
@@ -538,7 +533,19 @@ Note that, in particular, $\ns|\U|\simpoly\ns|\U^x|$ for all tuples of variables
 %%%%%%%%%%%%%%%%%%
 \section{Erd\H{o}s-Hajnal for stable graphs}\label{EH}
 \def\ceq#1#2#3{\parbox[t]{15ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
-
+In this section we assume that the language $L'$ contains a few more symbols (below, for convenience, all finite models considered have as domain a subset of $\omega$).
+%
+\begin{itemize}
+  \item[3.]  Let $X$ be an $n$-ary relation symbol of the first sort. 
+  %
+  Let $\phi\in L\cup\{X\}$ be a sentence.
+  %
+  Then we require that $L'$ has an $n$-ary predicate $A_\phi$ in the first sort.
+  %
+  The interpretation of $A_\phi$ is a relation of maximal cardinality that makes $\phi$ true in $M$.
+  %
+  If more then one relation satisfy the requirement above, we choose the minimal one in the lexicographic order (recall that the domain of $M$ is a subset of $\omega$).
+\end{itemize}
 Let $r(\mbox{-},\mbox{-})$ be a binary relation symbol.
 %
 The theory that $T_0$ says that $r(\mbox{-},\mbox{-})$ is an irreflexive and symmetric relation (i.e.\@ a graph) and that it is $m$-stable, where $m$ is fixed but arbitrary.
@@ -702,6 +709,7 @@ Non sono sicuro questa qui sotto sia la corretta traduzione finita.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Stable Szemer\'edi's regularity}
 
+\def\ceq#1#2#3{\parbox[t]{15ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
 Below, the theory $T_0$, the set of formulas $\Delta$, and the rank $m=R_\Delta$ are as defined in Section~\ref{EH}.
 
 \begin{lemma}
@@ -735,19 +743,86 @@ The same notation is used for nonempty subsets $A,B\subseteq M$ of a finite mode
 {\frac{\big|r(A,B)\big|}{|A|\cdot|B|}}
 
 \begin{corollary}
-  There is a partition of $\U$ into sets of positive measure $\D_1,\dots,\D_n$, where $n\le2^{2^m+1}$ such that for all $i,j$ either $d(\D_i, \D_j)=0$ or $d(\D_i, \D_j)=1$.
+  There is a partition of $\U$ into sets of positive measure $\D_1,\dots,\D_n$, where $n\le2^{2^m+1}$ such that for all $i,j$ either $d(\D_i, \D_j)=0$ or $d(\D_i, \D_j)=1$.\QED
 \end{corollary}
 
 
-Finally, the the stable Szemer\'edi regularity lemma is obtained applying Fact~\ref{fact_application}.
+Finally, the the stable Szemer\'edi regularity lemma is obtained reasoning as in Fact~\ref{fact_application}.
 
 
 \noindent\llap{\Large\color{red}\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax\ }%
-Il corollario qui sotto sembra troppo forte perch\'e $n$ non dipende da $\epsilon$. Non dev'essere la traduzione al finito giusta.
+%
+Il corollario qui sotto sembra troppo forte.
+Da quanto vedo in letteratura $n$ dovrebbe dipendere da $\epsilon$. 
+Forse non \`e la traduzione al finito giusta.
 
 \begin{corollary} 
   For every $\epsilon>0$ there is an $k$ such that for every finite $M\models T_0$ of cardinality larger than $k$, there is a partitions of $M$, say $D_1,\dots,D_n$, where $n\le2^{2^m+1}$ such that for all $i,j$ either $d(D_i,D_j)<\epsilon$ or $d(D_i,D_j)>1-\epsilon$.
   \QED
 \end{corollary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{My version of Radon-Nikodym}\label{samples}
+
+\def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
+\noindent\llap{\Large\color{red}\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax\ }%
+Stupidaggini
+
+In this section the canonical expansion of a finite model $M$ is a $3$-sorted structure $\<M,\NN, \NN^M\>$.
+%
+The language of $\<M,\NN, \NN^M\>$ is denoted (again) by $L'$.
+%
+The elements of $\NN^M$ are interpreted as a multisets and are called \emph{samples}.
+%
+If $s\in\NN^M$ and $s(a)=n$, the element $a$ occurs $n$-times in the multiset. 
+\begin{itemize}
+  \item[2'.] $L'$ has a function $f_\phi:\NN^{(M^{|x|})}\times M^{|z|}\to\NN$ for each formula $\phi(x\,;z)\in L'$ and every finite tuples of variables $x\,;z$ of the home sort. 
+  %
+  The interpretation of $f_\phi(r,b)$ is
+  
+  \ceq{\hfill f_\phi(r,b)}
+  {=}
+  {\sum_{a\in\phi(M,b)}r(a)}
+
+  We will use the notation $\ns|\phi(r,b)|$ which is suggestive of is interpretation of cardinality in the multiset setting.
+\end{itemize}
+
+Let $\D\subseteq\U^x$ be a definable set.
+%
+Let $s\in\ns\NN^{(\U^x)}$1
+
+%
+We define
+
+\ceq{\hfill{\Pr}_s(\D)}
+{=}
+{\inf\Big\{\frac{m}{n}\ :\ m,n\in\NN\sm\{0\} \text{ such that } n\,\ns|s\cdot\Indicator_\D|\le m\,\ns|s|\Big\}},
+
+where the infimum is taken in $\RR$.
+%
+It is immediate that ${\Pr}_s(\mbox{-})$ is a finite probability measure on the definable subsets of $\U$.
+%
+(By the Caratheodory Theorem it can be extended to a probability measure but this is not required here.)
+
+
+We say that $r,t\in\ns\NN^{(\U^{x})}$ are \emph{$\Delta$-equivalent samples\/} if for every $\psi(x)\in\pmDelta$\smallskip
+
+\ceq{\hfill\frac1n}
+{>}
+{\bigg|\frac{\ns|\psi(r)|}{\ns|r|}-\frac{\ns|\psi(t)|}{\ns|t|}\bigg|}\hfill for all $n\in\NN\sm\{0\}$.\smallskip
+
+Let $x^{\rm s}$ be a variable of the sort of $\ns\NN^{(\U^x)}$.
+Let 
+
+\ceq{\hfill\emph{$\Delta^{\rm\!s}$}}{=}{\Big\{m{\cdot}\ns|\psi(x^{\rm s})|\le n{\cdot}\ns|x^{\rm s}|\ :\  m,n\in\NN\ \mathrm{ and }\ \psi(x)\in\{{\wedge}\}\pmDelta\Big\}.}
+
+The samples that realize the type $p(x^{\rm s})=\Delta^{\rm\!s}\kern-.2ex\mbox{-}\tp(r)$ are those that are $\Delta$-equivalent to $r$. 
+
+
 
 \end{document}
