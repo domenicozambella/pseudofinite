@@ -445,7 +445,7 @@ The context will clarify if we are referring to the linear or to the polynomial 
 \begin{corollary}
   Let $\sim$ denote either $\simlin$ or $\simpoly$.
   %
-  Let $p(x)\subseteq L(M)$ be a type such that $\phi(\U)$ is large for every $\phi(x)$ that is conjunction of formulas in $p(x)$.
+  Let $p(x)\subseteq L(\U)$ be a type such that $\phi(\U)$ is large for every $\phi(x)$ that is conjunction of formulas in $p(x)$.
   %
   Then $p(x)$ has an extension to a complete type with the same property.\QED
 \end{corollary}
@@ -631,6 +631,7 @@ Finally the Erd\H{o}s-Hajnal property is obtained applying Fact~\ref{fact_applic
   There is an $n$ such that in every finite model $M\models T_0$ there is a set $A\subseteq M$ of cardinality at least $|M|^{1/n}$ that is either a clique or an anticlique.\QED
 \end{corollary}
 
+\begin{comment}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -740,7 +741,7 @@ The same notation is used for nonempty subsets $A,B\subseteq M$ of a finite mode
 
 \ceq{\hfill\emph{$d(A,B)$}}
 {=}
-{\frac{\big|r(A,B)\big|}{|A|\cdot|B|}}
+{\frac{\big|r(A,B)\big|}{|A\times B|}}
 
 \begin{corollary}
   There is a partition of $\U$ into sets of positive measure $\D_1,\dots,\D_n$, where $n\le2^{2^m+1}$ such that for all $i,j$ either $d(\D_i, \D_j)=0$ or $d(\D_i, \D_j)=1$.\QED
@@ -766,42 +767,61 @@ Forse non \`e la traduzione al finito giusta.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{My version of Radon-Nikodym}\label{samples}
+\section{A version of Radon-Nikodym}\label{samples}
 
-\def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+\def\ceq#1#2#3{\parbox[t]{15ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
 
 \noindent\llap{\Large\color{red}\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax\ }%
 Stupidaggini
 
-In this section the canonical expansion of a finite model $M$ is a $3$-sorted structure $\<M,\NN, \NN^M\>$.
+In this section the canonical expansion of a finite model $M$ is a $3$-sorted structure \emph{$\<M,\NN, \NN^M\>$.}
 %
 The language of $\<M,\NN, \NN^M\>$ is denoted (again) by $L'$.
 %
-The elements of $\NN^M$ are interpreted as a multisets and are called \emph{samples}.
+The elements of $\NN^M$ are interpreted as a multisets and are called \emph{samples.}
 %
 If $s\in\NN^M$ and $s(a)=n$, the element $a$ occurs $n$-times in the multiset. 
 \begin{itemize}
-  \item[2'.] $L'$ has a function $f_\phi:\NN^{(M^{|x|})}\times M^{|z|}\to\NN$ for each formula $\phi(x\,;z)\in L'$ and every finite tuples of variables $x\,;z$ of the home sort. 
+  \item[2'.] $L'$ has a function $f_\phi:\NN^{(M^{x})}\times M^{z}\to\NN$ for each formula $\phi(x\,;z)\in L'$ and every finite tuples of variables $x\,;z$ of the home sort. 
   %
   The interpretation of $f_\phi(r,b)$ is
   
-  \ceq{\hfill f_\phi(r,b)}
+  \ceq{\hfill f_\phi(s,b)}
   {=}
-  {\sum_{a\in\phi(M,b)}r(a)}
+  {\sum_{a\in\phi(M,b)}s(a)}
 
-  We will use the notation $\ns|\phi(r,b)|$ which is suggestive of is interpretation of cardinality in the multiset setting.
+  We will use the notation \emph{$\ns|\phi(s,b)|$\/} for $f_\phi(s,b)$ which is suggestive of is interpretation of cardinality in the multiset setting. We write \emph{$\ns|s|$\/} when $\phi(x\,;z)$ is the formula $x=x$.
 \end{itemize}
+
+We write that $r\le s$ if $r(a)\le s(a)$ for every $a\in\U^x$.
 
 Let $\D\subseteq\U^x$ be a definable set.
 %
-Let $s\in\ns\NN^{(\U^x)}$1
+We denote by \emph{$\Indicator_\D$} the indicator function of $\D$.
+%
+This may be viewed as a multiset.
+
+We say that $\D$ is $s$-large if $\ns|s\cdot\Indicator_\D|\sim\ns|s|$, where $\sim$ may be either $\simlin$ or $\simpoly$ according to the context.
+%
+We write $r\ll_\Delta s$ if every $r$-large $\{\wedge\}\pmDelta$-definable set is also $s$-large.
+
+\begin{theorem}
+  For every  $r,s\in\ns\NN^{(\U^x)}$ the folowing are equivalent
+  \begin{itemize}
+    \item[1.]  $r\ll_\Delta s$
+    \item[2.]  $r'\le s$ for some $r'$ that is $\Delta$-equivalent to $r$.
+  \end{itemize}
+\end{theorem}
+
+
+Let $s\in\ns\NN^{(\U^x)}$
 
 %
 We define
 
 \ceq{\hfill{\Pr}_s(\D)}
 {=}
-{\inf\Big\{\frac{m}{n}\ :\ m,n\in\NN\sm\{0\} \text{ such that } n\,\ns|s\cdot\Indicator_\D|\le m\,\ns|s|\Big\}},
+{\inf\Big\{\frac{m}{n}\ :\ m,n\in\NN\sm\{0\} \text{ such that } n\cdot\ns|s\cdot\Indicator_\D|\le m\cdot\ns|s|\Big\}},
 
 where the infimum is taken in $\RR$.
 %
@@ -809,20 +829,23 @@ It is immediate that ${\Pr}_s(\mbox{-})$ is a finite probability measure on the 
 %
 (By the Caratheodory Theorem it can be extended to a probability measure but this is not required here.)
 
-
-We say that $r,t\in\ns\NN^{(\U^{x})}$ are \emph{$\Delta$-equivalent samples\/} if for every $\psi(x)\in\pmDelta$\smallskip
-
-\ceq{\hfill\frac1n}
-{>}
-{\bigg|\frac{\ns|\psi(r)|}{\ns|r|}-\frac{\ns|\psi(t)|}{\ns|t|}\bigg|}\hfill for all $n\in\NN\sm\{0\}$.\smallskip
-
-Let $x^{\rm s}$ be a variable of the sort of $\ns\NN^{(\U^x)}$.
-Let 
+We say that $r,t\in\ns\NN^{(\U^{x})}$ are \emph{$\Delta$-equivalent samples\/} if  ${\Pr}_r(\D)={\Pr}_t(\D)$ for every $\{\wedge\}\pmDelta$-definable set $\D\subseteq\U^x$.
+% 
+We claim that the set of samples $\Delta$-equivalent $r$ is type definable. 
+%
+Let $x^{\rm s}$ be a variable with the sort of $\ns\NN^{(\U^{x})}$
 
 \ceq{\hfill\emph{$\Delta^{\rm\!s}$}}{=}{\Big\{m{\cdot}\ns|\psi(x^{\rm s})|\le n{\cdot}\ns|x^{\rm s}|\ :\  m,n\in\NN\ \mathrm{ and }\ \psi(x)\in\{{\wedge}\}\pmDelta\Big\}.}
 
-The samples that realize the type $p(x^{\rm s})=\Delta^{\rm\!s}\kern-.2ex\mbox{-}\tp(r)$ are those that are $\Delta$-equivalent to $r$. 
+The samples that realize the type $p(x^{\rm s})=\Delta^{\rm\!s}\mbox{-}\tp(r)$ are those that are $\Delta$-equivalent to $r$.
 
 
+% \begin{lemma}
+%   Let $r,s\in\ns\NN^\U$ and suppose that  for every $b\in\U^z$. 
+%   %
+%   Then there is a finite definable partition of $\P_1,\dots,\P_n\subseteq\U^z$ and $n_i\in\NN$ such that  $\ns|(\phi(r\cdot\P_i\,;b)|=n_i\cdot \ns|(\phi(s\cdot\P_i\,;b)|$ for every $b\in\U^z$. 
+% \end{lemma}
+  
+\end{comment}
 
 \end{document}
