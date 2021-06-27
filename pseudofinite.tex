@@ -16,9 +16,9 @@
 \usepackage{dsfont}
 \usepackage{euscript}
 \usepackage{fourier-orns}
-%\usepackage{pxfonts}
-%\usepackage{newpxtext}
-%\usepackage{tgpagella}
+\usepackage{pxfonts}
+\usepackage{newpxtext}
+\usepackage{tgpagella}
 \usepackage{palatino}
 \usepackage[sc]{mathpazo} % add possibly `sc` and `osf` options
 %\usepackage{eulervm}
@@ -333,12 +333,6 @@ diagrams={>=latex}
 \def\medrel#1{\parbox[t]{5ex}{\hfil$\displaystyle #1$}}
 \def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
 
-
-As a matter of personal taste I have avoided the use of ultrapowers to deal with pseudofinite structures. 
-%
-Also, I have avoided the notion of pseudofinite dimension, as it is too general for the intended applications.
-
-
 We say that a sentence holds in \emph{almost all finite models\/} if it holds in every finite model of sufficienly large cardinality.
 
 Let $T_0$ be a given theory with arbitrarily large finite models.
@@ -351,7 +345,7 @@ A structure $N$ is a \emph{pseudofinite\/} model of $T_0$ if $N\models T_{\rm fi
 %
 This is equivalent to requiring that every sentence $\phi\in\Th(N)$ holds in arbitrarily large finite models of $T_0$.
 %
-Note that every model of $T_{\rm fin}$ is infinite. (Other authors include in $T_{\rm fin}$ only sentences true in \textit{all\/} finite models. Hence they include the finite models among the pseudofinite ones.)
+Note that every model of $T_{\rm fin}$ is infinite.
 
 We now discribe a canonical expansion of a finite model $M$ to a two sorted structure $\<M,\NN\>$.
 %
@@ -365,7 +359,7 @@ The language of $\<M,\NN\>$ is denoted by $L'$.
 
 For some application a richer language will be necessary (cfr.\@ Section~\ref{EH} below).
 %
-Other times we even need to expand $M$ with a few more sorts (cfr.\@ Section~\ref{samples} below).
+Other times we need to expand $M$ with a few more sorts.
 
 We define
 
@@ -631,7 +625,64 @@ Finally the Erd\H{o}s-Hajnal property is obtained applying Fact~\ref{fact_applic
   There is an $n$ such that in every finite model $M\models T_0$ there is a set $A\subseteq M$ of cardinality at least $|M|^{1/n}$ that is either a clique or an anticlique.\QED
 \end{corollary}
 
-\begin{comment}
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pseudofinite samples}
+
+\def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+We now describe an expansion of a finite model $M$ to a three sorted structure $\<M,\RR^M,\RR\>$.
+%
+The language of $\<M,\RR^M,\RR\>$ is denoted by $L'$.
+\begin{itemize}
+  \item[1.] $L'$ expands the language of $M$ and $\RR$, where $\RR$ is considered as a structure in the language with symbols for all relations and functions of any finite arity.
+  \item[2.] $\RR^M$ is the set of all function from $M$ to $\RR$.% In the language there is a binary function symbol $\RR^M\times M\to \RR$ that for $f\in \RR^M$, $a\in M$ gives the value of $f$ on $a$.
+  \item[3.] $L'$ has a function $\Sigma_\phi:\RR^M\times M^{|z|}\to\RR$ for each formula $\phi(x\,;z)\in L'$ and every finite tuples of variables $x\,;z$ of the first sort. 
+  %
+  The value of $\Sigma_\phi$ for a given $f\in \RR^M$ and $b\in M^{|z|}$ is the sum
+  
+  \ceq{}{}{\sum_{\phi(x\,;\,b)}fx}
+\end{itemize}
+
+As a particular case of \ssf3, there is a binary function $\RR^M\times M\to\RR$ that given $f\in \RR^M$ and $b\in M$ outputs the value $fb$.
+
+If $f,g\in \U$ we write $g\ll_\Delta f$ if for every $\psi(x)$ that is conjunction of formulas in $\Delta$
+
+\ceq{\hfill\sum_{\psi(x)}gx}{\lesslin}{\sum_{\psi(x)}fx}
+
+\begin{lemma}
+  If $g\ll_\Delta f$ then for every $\epsilon$ there is a simple function $h_\epsilon$ such that for every $\psi(x)$ that is conjunction of formulas in $\Delta$
+
+\ceq{\hfill\Big|\sum_{\psi(x)}gx-\sum_{\psi(x)}h_\epsilon x\cdot fx\Big|}{<}{\epsilon}
+
+\end{lemma}
+
+
+for every formula $\epsilon\in\RR^+$ there is a $\delta\in\RR^+$ such that 
+
+
+holds
+
+
+$\phi(x\,;b)$
+
+
+
+For every $\epsilon$ there is an function $k$ sich that
+
+$\sum_{\phi(x\,;\,b)}gx-kfx<\epsilon$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pseudofinite counting measure}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -762,6 +813,169 @@ Forse non \`e la traduzione al finito giusta.
   \QED
 \end{corollary}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Szemer\'edi's regularity Lemma}
+\def\ceq#1#2#3{\parbox[t]{40ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
+A pair of subsets $V',V''\subseteq M$ is \emph{$\epsilon$-regular\/} if for every $A\subseteq V'$ and $B\subseteq V''$
+
+\ceq{\hfill\big|\Pr(r\,|\,A{\times} B) - \Pr(r\,|\,V'{\times} V'')\big|}
+{<}
+{\epsilon\, / \Pr(A{\times} B\,|\,V'{\times} V'')}
+
+
+\begin{lemma}
+  For every $\epsilon>0$ there is $k\in \NN$ such that the following obtains.
+  
+  For every graph $M$ of cardinality $>k$, there is a partition $\{V_i:i<k\}$ of $M$ such that if $\Sigma=\{\<i,j\> : V_i, V_j \textrm{ is not } \epsilon\textrm{-regular}\}$ then
+
+  \ceq{\hfill\sum_{\<i,j\>\in\Sigma}\Pr(V_i\times V_j)}
+  {<}
+  {\epsilon}
+
+
+  % \ceq{\hfill\frac{|A\times B|}{|V_i\times V_j|}\cdot\bigg|\frac{|r(A,B)|}{|A\times B|} - \frac{|r(V_i,V_j)|}{|V_i\times V_j|}\bigg|}
+  % {<}
+  % {\epsilon}
+
+  % \ceq{\hfill\Pr(A,B|V_i,V_j)\cdot\big|\Pr(r|A,B) - \Pr(r|V_i,V_j)\big|}
+  % {<}
+  % {\epsilon}
+
+\end{lemma}
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+\clearpage\section{Bohhh}
+Let $M$ range over the finite graphs.
+
+Let $f:\NN\to\NN$ be an unbounded monotone function. 
+
+For $m\in\NN\sm\{0\}$, we write $M\models R^f< m$ if there is no map 
+
+\ceq{\hfill a\ :\ {}^{<m}2}{\to}{ M} 
+
+\ceq{\hfill   s}{\mapsto}{a_s} 
+
+such that for every $s\in {}^{m}2$ the finite type 
+
+\ceq{\hfill \big\{\neg^{s_i}\,r(x\,;a_{s\restriction i})\, :\, i<m\big\}}
+{}
+{}
+
+has more than $|M|^{1/f(|M|)}$ solutions.
+%
+We write $M\models R^f{=}\,m$ if $m$ is the minimal such that $M\models R^f{<}\, m+1$. 
+%
+If $S\subseteq M$ is a definable set, we write $M\models R^f(S)=m$ if all the solutions above are in $S$.
+
+Let $T_m$ be the theory of graphs plus axioms that $R^f\le m$.
+
+Let $k=f(\ns|\U|)$.
+%
+As $f$ is an unbounded monotone function $k>\NN$.
+
+Among the large $L(\U)$-definable subsets of $\U$ we fix one, say \emph{$\S=\sigma(\U)$}, such that $R^f\big(\S\big)$ is minimal.
+
+Let \emph{$\Delta$} $=\{r(a,x) :\, a\in\U\}$.
+
+The following fact is immediate (note the assumtion $n>0$).
+
+\begin{fact}
+  Let $\S\subseteq\U$ and suppose that for some $\pmDelta$-definable set $\D$ both $\S\cap\D$ and $\S\cap\neg\D$ have rank $n>0$.
+  %
+  Then $R^f(\S)=n+1$.\QED
+\end{fact}
+
+\begin{fact}
+  For every $\pmDelta$-definable set $\D\subseteq\U$, exactly one between $\S\cap\D$ and $\S\cap\neg\D$ is large.
+\end{fact}
+
+\begin{proof}
+  As $\S$ is large, at least one between $\S\cap\D$ and $\S\cap\neg\D$ is large by Proposition~\ref{prop_+=max}.
+
+  Firstly, assume $R^f(\S)=0$.
+  %
+  Then for every $a\in\U$ either $S\cap r(\U,a)$ or $\S\cap\neg r(\U,a)$ has cardinality $<\ns|\U|^{1/k}$, which implies that it is small.
+  
+  Now, assume $R^f(\S)=n>0$ and suppose for a contradiction that $\S\cap\D$ and $\S\cap\neg\D$ are both large.
+  %
+  By the minimality of $n$, both $\S\cap\D$ and $\S\cap\neg\D$ have rank $n$.
+  %
+  This contradicts the fact above.
+\end{proof}
+
+\begin{corollary}
+  There is a (unique) complete $\pmDelta$-type $p(x)$ such that $\S\sm\phi(\U)$ is small for every $\phi(x)\in p$.\QED 
+\end{corollary}
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+\hrulefill
+\def\ceq#1#2#3{\parbox[t]{15ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
+We say tha a type $p(x)\subseteq\pmDelta$ is \emph{p-isolated\/} by $\sigma(x)$ if  this is a p-large formula such that $\sigma(x)\wedge\neg\phi(x)$ is p-small for every $\phi(x)\in p$.  We may equivalently say that $\phi(x)$ is p-co-small in $\sigma(x)$. 
+
+It is convenient to fix a model where to realze global types.
+In the following $\<\V,\ns\ns\NN\>$ is a model such that $\<\U,\ns\NN\>\preceq\<\V,\ns\ns\NN\>$.
+We say that $a\in\V$ is \emph{p-isolated\/} if some formula $\sigma(x)$ such that $a\models\sigma(x)$ p-isolates $\pmDelta\mbox{-}\tp(a)$.
+
+For $a,b\in\V$, we write 
+
+\ceq{\hfill b\mathop{\cnonfork\kern-.5ex^{'}}_\U a}
+{\IFF}
+{\phi(b,a)} holds for all $\phi(x,y)\in L'(\U)$ such that $\U\subseteq\phi(\V,a)$. 
+
+ 
+This is the standard coheir-heir relation in the language $L'$.
+%
+Note that the standard numbers $\NN$ are definible in $L'$, hence they may occour in formulas of $L'(\U)$.
+
+
+
+\begin{lemma}
+  Let $a,b\in\V$ be such that $b\mathop{\cnonfork\kern-.5ex^{'}}_\U a$.
+  %
+  If $\pmDelta\mbox{-}\tp(a/\U)$ be p-isolated by $\sigma(x)$, then $\pmDelta\mbox{-}\tp(a/\U,b)$ is p-isolated by the same formula.
+\end{lemma}
+\begin{proof}
+  Suppose not. 
+  %
+  Then there is a formula in $\pmDelta$ such that $\phi(b,a)$ and $\sigma(x)\wedge\neg\phi(b,x)$ is p-large. 
+  %
+  Then $\phi(b,a)\ \wedge\ \ns|\sigma(x)\wedge\neg\phi(b,x)|\,\ge\, \ns|x=x|^{1/n}$ for some $n\in\NN$.
+
+  By the definition above $\neg\phi(c,a)\ \wedge\ \ns|\sigma(x)\wedge\neg\phi(c,x)|\,\ge\, \ns|x=x|^{1/n}$ for some $c\in\U$.
+  %
+  This contradicts the assumption that $\pmDelta\mbox{-}\tp(a/\U)$ is p-isolated.
+\end{proof}
+
+
+\begin{lemma}
+  Let $a\in\V$ be such that $\pmDelta\mbox{-}\tp(a/\U)$ be p-isolated by $\sigma(x)$.
+  %
+  There is a p-long internal sequence $c=\<c_i:i<n\>$ such that either $r(c_i,c_j)$ for all $i<j<n$ or $\neg r(c_i,c_j)$ for all  $i<j<n$.  
+\end{lemma}
+\begin{proof}
+  Let $a\equiv'_\U b$ be p-isolated by the same formula $\sigma(x)$.
+  %
+  Suppose that $b\mathop{\cnonfork\kern-.5ex^{'}}_\U a$ and that $r(b,a)$.
+  %
+  Then $r(b,x)$ is co-p-small in $\sigma(x)$.
+  %
+  As $a\equiv'_\U b$, for evey $n\in\NN$, the formula $\phi(y)=\ns|r(y,x)|_x<|x=x|^{1/n}$ is co-p-small in $\sigma(x)$. 
+
+  Let $\B_n=\{b\in\V\ :\ \sigma(b) \textrm{ and } \ns|\neg r(b,x)|<\ns|x=x|^{1/n}\}$
+\end{proof}
+
+
+\begin{comment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
